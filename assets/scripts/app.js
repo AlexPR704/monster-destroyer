@@ -13,6 +13,10 @@ function attackHandler() {
     const damage = dealMonsterDamage(ATTACK_VALUE);
     currentMonsterHealth -= damage;
     //this means the currentmonsterhealth is set equal to currentmonsterhealth minus damage"
+    if (currentMonsterHealth <= 0) {
+        alert('You won!');
+    //checks the health and if it is true then it will alert the user//
+    }
 }
 //eventlistener that when the user clicks the attack button it will go to
 //the function called attackHandler//
