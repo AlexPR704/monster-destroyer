@@ -25,6 +25,11 @@ function attackHandler() {
         alert('You have a draw!')
     }
 }
+
+function strongAttackHandler() {
+    
+}
 //eventlistener that when the user clicks the attack button it will go to
 //the function called attackHandler//
 attackBtn.addEventListener('click', attackHandler);
+strongAttackBtn.addEventListener('click');
