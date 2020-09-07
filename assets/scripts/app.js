@@ -1,4 +1,5 @@
 const ATTACK_VALUE = 10;
+const MONSTER_ATTACK_VALUE = 14;
 
 var chosenMaxLife = 100;
 var currentMonsterHealth = chosenMaxLife;
@@ -13,9 +14,13 @@ function attackHandler() {
     const damage = dealMonsterDamage(ATTACK_VALUE);
     currentMonsterHealth -= damage;
     //this means the currentmonsterhealth is set equal to currentmonsterhealth minus damage"
+    const playerDamage = dealPlayerDamage(MONSTER_ATTACK_VALUE);
+    currentPlayerHealth -=playerDamage;
     if (currentMonsterHealth <= 0) {
         alert('You won!');
     //checks the health and if it is true then it will alert the user//
+    } else if (currentPlayerHealth <= 0) {
+        alert('You Lost!');
     }
 }
 //eventlistener that when the user clicks the attack button it will go to
