@@ -1,6 +1,7 @@
 const ATTACK_VALUE = 10;
-const MONSTER_ATTACK_VALUE = 14;
 const STRONG_ATTACK_VALUE = 17;
+const MONSTER_ATTACK_VALUE = 14;
+
 
 var chosenMaxLife = 100;
 var currentMonsterHealth = chosenMaxLife;
@@ -28,9 +29,9 @@ function attackHandler() {
 }
 
 function strongAttackHandler() {
-    //launch the attack to the monster//
+    //launch the  strong attack to the monster//
     //by storing the monster damage in the local const; I can use the data to adjust the monster's health.//
-    const damage = dealMonsterDamage(ATTACK_VALUE);
+    const damage = dealMonsterDamage(STRONG_ATTACK_VALUE);
     currentMonsterHealth -= damage;
     //this means the currentmonsterhealth is set equal to currentmonsterhealth minus damage"
     const playerDamage = dealPlayerDamage(MONSTER_ATTACK_VALUE);
@@ -44,7 +45,8 @@ function strongAttackHandler() {
         alert('You have a draw!')
     }
 }
+
 //eventlistener that when the user clicks the attack button it will go to
-//the function called attackHandler//
+//the function called attackHandler, strongAttackHandler//
 attackBtn.addEventListener('click', attackHandler);
-strongAttackBtn.addEventListener('click');
+strongAttackBtn.addEventListener('click', strongAttackHandler);
