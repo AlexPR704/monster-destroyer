@@ -9,11 +9,17 @@ var currentPlayerHealth = chosenMaxLife;
 
 
 adjustHealthBars(chosenMaxLife);
-
-function attackHandler() {
-    //launch the attack to the monster//
+//CREATING FUNCTION TO HANDLE BOTH MODES OF ATTACK//
+function attackMonster(mode) {
+    var maxDamage;
+    if (mode === 'ATTACK') {
+        maxDamage = ATTACK_VALUE;
+    } else if (mode === 'STRONG_ATTACK') {
+        maxDamage = STRONG_ATTACK_VALUE;
+    }
+     //launch the attack to the monster//
     //by storing the monster damage in the local const; I can use the data to adjust the monster's health.//
-    const damage = dealMonsterDamage(ATTACK_VALUE);
+    const damage = dealMonsterDamage(maxDamage);
     currentMonsterHealth -= damage;
     //this means the currentmonsterhealth is set equal to currentmonsterhealth minus damage"
     const playerDamage = dealPlayerDamage(MONSTER_ATTACK_VALUE);
@@ -26,6 +32,10 @@ function attackHandler() {
     } else if (currentPlayerHealth <= 0 && currentMonsterHealth <= 0) {
         alert('You have a draw!')
     }
+}
+
+function attackHandler() {
+   
 }
 
 function strongAttackHandler() {
