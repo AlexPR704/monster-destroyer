@@ -13,7 +13,7 @@ adjustHealthBars(chosenMaxLife);
 function reset() {
   currentMonsterHealth = chosenMaxLife;
   currentPlayerHealth = chosenMaxLife;
-  resetGame();
+  resetGame(chosenMaxLife);
   //creating this fucntion to reste the game with the full health and bonus life//
 }
 
@@ -41,6 +41,12 @@ function endRound() {
     alert('You Lost!');
   } else if (currentPlayerHealth <= 0 && currentMonsterHealth <= 0) {
     alert('You have a draw!');
+  }
+
+  if (
+      currentMonsterHealth <= 0 || currentPlayerHealth <= 0
+  ) {
+      reset();
   }
 }
 
