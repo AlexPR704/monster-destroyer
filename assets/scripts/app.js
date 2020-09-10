@@ -7,13 +7,27 @@ const HEAL_VALUE = 20;
 var chosenMaxLife = 100;
 var currentMonsterHealth = chosenMaxLife;
 var currentPlayerHealth = chosenMaxLife;
+var hasBonusLife = true; //var that holds a boolean value as true//
 
 
 adjustHealthBars(chosenMaxLife);
 
 function endRound() {
+    const initialPlayerHealth = currentPlayerHealth;
     const playerDamage = dealPlayerDamage(MONSTER_ATTACK_VALUE);
     currentPlayerHealth -=playerDamage;
+
+    /*If you just refeneence the var without the comparison operator; javascript will check to see
+    //... if the currentPlayerHealth less than or equal to 0; then it will use the bonus life. But now it will use
+    the bonus life and will use the removeBonusLife function. Then we stored the players intial players health
+    before the monster attcked in the currentPlayerHealth for the bonus life that was used.*/
+    if(currentPlayerHealth <= 0 && hasBonusLife) {
+        hasBonusLife = false;
+        removeBonusLife();
+        currentPlayerHealth = initialPlayerHealth;
+        alert('You would be dead but the bonus life has saved!')
+    }
+
     if (currentMonsterHealth <= 0 && currentPlayerHealth > 0) {
         alert('You won!');
     //checks the health and if it is true then it will alert the user//
