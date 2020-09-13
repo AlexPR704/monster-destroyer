@@ -7,7 +7,11 @@ const enteredValue = prompt('Maximum life for you and the monster.', '100');
 
 var chosenMaxLife = parseInt(enteredValue);
 
-if (isNaN(chosenMaxLife)) {
+if (isNaN(chosenMaxLife) || chosenMaxLife <= 0) {
+  /*the reason we did the or perator is because this allows javascript
+  to check the first condition and if it isn't a vlue then it will give
+  the user the chosenmaxlife we provided. An && operator will always have
+  javascript to check both conditions which isn't neccesary right now.*/
     chosenMaxLife = 100;
     /* by creating this condition; we are able to check to see
     if the user typed into the prompt was a number and not a string.
