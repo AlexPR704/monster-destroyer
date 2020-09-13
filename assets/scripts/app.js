@@ -3,7 +3,19 @@ const STRONG_ATTACK_VALUE = 17;
 const MONSTER_ATTACK_VALUE = 14;
 const HEAL_VALUE = 20;
 
-var chosenMaxLife = 100;
+const enteredValue = prompt('Maximum life for you and the monster.', '100');
+
+var chosenMaxLife = parseInt(enteredValue);
+
+if (isNaN(chosenMaxLife)) {
+    chosenMaxLife = 100;
+    /* by creating this condition; we are able to check to see
+    if the user typed into the prompt was a number and not a string.
+    We check by using a built in function from javascript called isNaN.
+    if the user does a string or negative value then it will be set to
+    the chosenMaxLife value we have given.*/
+}
+
 var currentMonsterHealth = chosenMaxLife;
 var currentPlayerHealth = chosenMaxLife;
 var hasBonusLife = true; //var that holds a boolean value as true//
