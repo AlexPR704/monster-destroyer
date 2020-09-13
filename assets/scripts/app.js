@@ -35,8 +35,27 @@ var hasBonusLife = true; //var that holds a boolean value as true//
 
 adjustHealthBars(chosenMaxLife);
 
-function writeToLog(event) {
-
+function writeToLog(ev,  val, monsterHealth, playerHealth) {
+  var logEntry;
+  if (ev === LOG_EVENT_PLAYER_ATTACK) {
+    logEntry = {
+      event: ev,
+      value: val,
+      target: 'MONSTER',
+      finalMonsterHealth: monsterHealth,
+      finalPlayerHealth: playerHealth
+    };
+    battleLog.push(logEntry);
+  } else if (ev === LOG_EVENT_PLAYER_STRONG_ATTACK) {
+    logEntry = {
+      event: ev,
+      value: val,
+      target: 'MONSTER',
+      finalMonsterHealth: monsterHealth,
+      finalPlayerHealth: playerHealth
+    };
+    battleLog.push(logEntry);
+  }  
 }
 
 function reset() {
