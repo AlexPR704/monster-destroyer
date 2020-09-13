@@ -5,18 +5,24 @@ const HEAL_VALUE = 20;
 
 const MODE_ATTACK = 'ATTACK';
 const MODE_STRONG_ATTACK = 'STRONG_ATTACK';
+const LOG_EVENT_PLAYER_ATTACK = 'PLAYER_ATTACK';
+const LOG_EVENT_PLAYER_STRONG_ATTACK = 'PLAYER_STRONG_ATTACK';
+const LOG_EVENT_MONSTER_ATTACK = 'MONSTER_ATTACK';
+const LOG_EVENT_PLAYER_HEAL = 'PLAYER_HEAL';
+const LOG_EVENT_GAME_OVER = 'GAME OVER';
 
 const enteredValue = prompt('Maximum life for you and the monster.', '100');
 
 var chosenMaxLife = parseInt(enteredValue);
+var battleLog = [];
 
 if (isNaN(chosenMaxLife) || chosenMaxLife <= 0) {
   /*the reason we did the or perator is because this allows javascript
   to check the first condition and if it isn't a vlue then it will give
   the user the chosenmaxlife we provided. An && operator will always have
   javascript to check both conditions which isn't neccesary right now.*/
-    chosenMaxLife = 100;
-    /* by creating this condition; we are able to check to see
+  chosenMaxLife = 100;
+  /* by creating this condition; we are able to check to see
     if the user typed into the prompt was a number and not a string.
     We check by using a built in function from javascript called isNaN.
     if the user does a string or negative value then it will be set to
@@ -28,6 +34,10 @@ var currentPlayerHealth = chosenMaxLife;
 var hasBonusLife = true; //var that holds a boolean value as true//
 
 adjustHealthBars(chosenMaxLife);
+
+function writeToLog(event) {
+
+}
 
 function reset() {
   currentMonsterHealth = chosenMaxLife;
@@ -62,10 +72,8 @@ function endRound() {
     alert('You have a draw!');
   }
 
-  if (
-      currentMonsterHealth <= 0 || currentPlayerHealth <= 0
-  ) {
-      reset();
+  if (currentMonsterHealth <= 0 || currentPlayerHealth <= 0) {
+    reset();
   }
 }
 
