@@ -17,7 +17,7 @@ var chosenMaxLife = parseInt(enteredValue);
 var battleLog = [];
 
 if (isNaN(chosenMaxLife) || chosenMaxLife <= 0) {
-  /*the reason we did the or perator is because this allows javascript
+  /*the reason we did the or operator is because this allows javascript
   to check the first condition and if it isn't a vlue then it will give
   the user the chosenmaxlife we provided. An && operator will always have
   javascript to check both conditions which isn't neccesary right now.*/
@@ -45,7 +45,6 @@ function writeToLog(ev,  val, monsterHealth, playerHealth) {
       finalMonsterHealth: monsterHealth,
       finalPlayerHealth: playerHealth
     };
-    battleLog.push(logEntry);
   } else if (ev === LOG_EVENT_PLAYER_STRONG_ATTACK) {
     logEntry = {
       event: ev,
@@ -54,8 +53,31 @@ function writeToLog(ev,  val, monsterHealth, playerHealth) {
       finalMonsterHealth: monsterHealth,
       finalPlayerHealth: playerHealth
     };
-    battleLog.push(logEntry);
-  }  
+  }  else if (ev === LOG_EVENT_MONSTER_ATTACK) {
+    logEntry = {
+      event: ev,
+      value: val,
+      target: 'PLAYER',
+      finalMonsterHealth: monsterHealth,
+      finalPlayerHealth: playerHealth
+    };
+  } else if (ev === LOG_EVENT_PLAYER_HEAL) {
+    logEntry = {
+      event: ev,
+      value: val,
+      target: 'PLAYER',
+      finalMonsterHealth: monsterHealth,
+      finalPlayerHealth: playerHealth
+    };
+  }else if (ev === LOG_EVENT_GAME_OVER) {
+    logEntry = {
+      event: ev,
+      value: val,
+      finalMonsterHealth: monsterHealth,
+      finalPlayerHealth: playerHealth
+    };
+  }
+  battleLog.push(logEntry);
 }
 
 function reset() {
