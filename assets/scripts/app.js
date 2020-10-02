@@ -35,15 +35,33 @@ var hasBonusLife = true; //var that holds a boolean value as true//
 
 adjustHealthBars(chosenMaxLife);
 
-function writeToLog(ev,  val, monsterHealth, playerHealth) {
-  var logEntry;
+function writeToLog(ev, val, monsterHealth, playerHealth) {
+  var logEntry = {
+    event: ev,
+    value: val,
+    finalMonsterHealth: monsterHealth,
+    finalPlayerHealth: playerHealth,
+  };
+  switch (ev) {
+    case LOG_EVENT_PLAYER_ATTACK:
+      logEntry.target = 'MONSTER';
+      break;
+    case LOG_EVENT_PLAYER_STRONG_ATTACK:
+      logEntry = {
+        event: ev,
+        value: val,
+        target: 'MONSTER',
+        finalMonsterHealth: monsterHealth,
+        finalPlayerHealth: playerHealth,
+      };
+  }
   if (ev === LOG_EVENT_PLAYER_ATTACK) {
     logEntry = {
       event: ev,
       value: val,
       target: 'MONSTER',
       finalMonsterHealth: monsterHealth,
-      finalPlayerHealth: playerHealth
+      finalPlayerHealth: playerHealth,
     };
   } else if (ev === LOG_EVENT_PLAYER_STRONG_ATTACK) {
     logEntry = {
@@ -51,15 +69,15 @@ function writeToLog(ev,  val, monsterHealth, playerHealth) {
       value: val,
       target: 'MONSTER',
       finalMonsterHealth: monsterHealth,
-      finalPlayerHealth: playerHealth
+      finalPlayerHealth: playerHealth,
     };
-  }  else if (ev === LOG_EVENT_MONSTER_ATTACK) {
+  } else if (ev === LOG_EVENT_MONSTER_ATTACK) {
     logEntry = {
       event: ev,
       value: val,
       target: 'PLAYER',
       finalMonsterHealth: monsterHealth,
-      finalPlayerHealth: playerHealth
+      finalPlayerHealth: playerHealth,
     };
   } else if (ev === LOG_EVENT_PLAYER_HEAL) {
     logEntry = {
@@ -67,14 +85,14 @@ function writeToLog(ev,  val, monsterHealth, playerHealth) {
       value: val,
       target: 'PLAYER',
       finalMonsterHealth: monsterHealth,
-      finalPlayerHealth: playerHealth
+      finalPlayerHealth: playerHealth,
     };
-  }else if (ev === LOG_EVENT_GAME_OVER) {
+  } else if (ev === LOG_EVENT_GAME_OVER) {
     logEntry = {
       event: ev,
       value: val,
       finalMonsterHealth: monsterHealth,
-      finalPlayerHealth: playerHealth
+      finalPlayerHealth: playerHealth,
     };
   }
   battleLog.push(logEntry);
@@ -96,7 +114,7 @@ function endRound() {
     playerDamage,
     currentMonsterHealth,
     currentPlayerHealth
-    );
+  );
 
   /*If you just refeneence the var without the comparison operator; javascript will check to see
     //... if the currentPlayerHealth less than or equal to 0; then it will use the bonus life. But now it will use
@@ -117,7 +135,7 @@ function endRound() {
       'Player Won',
       currentMonsterHealth,
       currentPlayerHealth
-      );
+    );
     //checks the health and if it is true then it will alert the user//
   } else if (currentPlayerHealth <= 0 && currentMonsterHealth > 0) {
     alert('You Lost!');
@@ -126,7 +144,7 @@ function endRound() {
       'Monster Won',
       currentMonsterHealth,
       currentPlayerHealth
-      );
+    );
   } else if (currentPlayerHealth <= 0 && currentMonsterHealth <= 0) {
     alert('You have a draw!');
     writeToLog(
@@ -134,7 +152,7 @@ function endRound() {
       'A Draw',
       currentMonsterHealth,
       currentPlayerHealth
-      );
+    );
   }
 
   if (currentMonsterHealth <= 0 || currentPlayerHealth <= 0) {
@@ -151,18 +169,13 @@ function attackMonster(mode) {
     logEvent = LOG_EVENT_PLAYER_ATTACK;
   } else if (mode === MODE_STRONG_ATTACK) {
     maxDamage = STRONG_ATTACK_VALUE;
-    logEvent = LOG_EVENT_PLAYER_STRONG_ATTACK
+    logEvent = LOG_EVENT_PLAYER_STRONG_ATTACK;
   }
   //launch the attack to the monster//
   //by storing the monster damage in the local const; I can use the data to adjust the monster's health.//
   const damage = dealMonsterDamage(maxDamage);
   currentMonsterHealth -= damage;
-  writeToLog(
-    logEvent,
-    damage,
-    currentMonsterHealth,
-    currentPlayerHealth
-    );
+  writeToLog(logEvent, damage, currentMonsterHealth, currentPlayerHealth);
   //this means the currentmonsterhealth is set equal to currentmonsterhealth minus damage"
   endRound();
 }
@@ -190,7 +203,7 @@ function healPlayerHandler() {
     healValue,
     currentMonsterHealth,
     currentPlayerHealth
-    );
+  );
   endRound();
 }
 
