@@ -15,6 +15,7 @@ const enteredValue = prompt('Maximum life for you and the monster.', '100');
 
 var chosenMaxLife = parseInt(enteredValue);
 var battleLog = [];
+var lastLoggedEntry;
 
 if (isNaN(chosenMaxLife) || chosenMaxLife <= 0) {
   /*the reason we did the or operator is because this allows javascript
@@ -237,7 +238,8 @@ function healPlayerHandler() {
 }
 
 function printLogHandler() {
-  console.log(battleLog);
+  for (var i = 0; i < 3; i++)
+  console.log('------------');
 }
 
 //eventlistener that when the user clicks the attack button it will go to
