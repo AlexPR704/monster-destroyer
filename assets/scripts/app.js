@@ -241,6 +241,11 @@ function printLogHandler() {
   for (var i = 0; i < 3; i++)
   console.log('------------');
 }
+var j = 3;
+do {
+  console.log(j);
+  j++;
+} while (j < 3);
 
 //eventlistener that when the user clicks the attack button it will go to
 //the function called attackHandler, strongAttackHandler//
