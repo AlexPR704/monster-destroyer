@@ -238,14 +238,25 @@ function healPlayerHandler() {
 }
 
 function printLogHandler() {
-  for (var i = 0; i < 3; i++)
-  console.log('------------');
+  for (var i = 0; i < 3; i++) console.log('------------');
 }
 var j = 3;
 do {
   console.log(j);
   j++;
 } while (j < 3);
+var i = 0;
+for (const logEntry of battleLog) {
+  if (!lastLoggedEntry || lastLoggedEntry === i) {
+    console.log(`#${i}`);
+    for (const key in logEntry) {
+      console.log(`${key} => ${logEntry[key]}`);
+    }
+    lastLoggedEntry = i;
+  }
+  i++;
+  break;
+}
 
 //eventlistener that when the user clicks the attack button it will go to
 //the function called attackHandler, strongAttackHandler//
