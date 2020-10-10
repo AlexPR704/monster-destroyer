@@ -11,24 +11,29 @@ const LOG_EVENT_MONSTER_ATTACK = 'MONSTER_ATTACK';
 const LOG_EVENT_PLAYER_HEAL = 'PLAYER_HEAL';
 const LOG_EVENT_GAME_OVER = 'GAME OVER';
 
-const enteredValue = prompt('Maximum life for you and the monster.', '100');
-
-var chosenMaxLife = parseInt(enteredValue);
 var battleLog = [];
 var lastLoggedEntry;
 
-if (isNaN(chosenMaxLife) || chosenMaxLife <= 0) {
-  /*the reason we did the or operator is because this allows javascript
+function getMaxLifeValues() {
+  const enteredValue = prompt('Maximum life for you and the monster.', '100');
+
+  const parsedValue = parseInt(enteredValue);
+
+  if (isNaN(chosenMaxLife) || chosenMaxLife <= 0) {
+    /*the reason we did the or operator is because this allows javascript
   to check the first condition and if it isn't a vlue then it will give
   the user the chosenmaxlife we provided. An && operator will always have
   javascript to check both conditions which isn't neccesary right now.*/
-  chosenMaxLife = 100;
-  /* by creating this condition; we are able to check to see
+    chosenMaxLife = 100;
+    /* by creating this condition; we are able to check to see
     if the user typed into the prompt was a number and not a string.
     We check by using a built in function from javascript called isNaN.
     if the user does a string or negative value then it will be set to
     the chosenMaxLife value we have given.*/
+  }
 }
+
+
 
 var currentMonsterHealth = chosenMaxLife;
 var currentPlayerHealth = chosenMaxLife;
@@ -248,7 +253,7 @@ function printLogHandler() {
   } while (j < 3);
   var i = 0;
   for (const logEntry of battleLog) {
-    if (!lastLoggedEntry && lastLoggedEntry !== 0 || lastLoggedEntry < i) {
+    if ((!lastLoggedEntry && lastLoggedEntry !== 0) || lastLoggedEntry < i) {
       console.log(`#${i}`);
       for (const key in logEntry) {
         console.log(`${key} => ${logEntry[key]}`);
