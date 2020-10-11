@@ -29,12 +29,20 @@ function getMaxLifeValues() {
   return parsedValue;
 }
 
-var chosenMaxLife = getMaxLifeValues();
-    /* by creating this condition; we are able to check to see
-    if the user typed into the prompt was a number and not a string.
-    We check by using a built in function from javascript called isNaN.
-    if the user does a string or negative value then it will be set to
-    the chosenMaxLife value we have given.*/
+var chosenMaxLife;
+
+try {
+  chosenMaxLife = getMaxLifeValues();
+  /* by creating this condition; we are able to check to see
+  if the user typed into the prompt was a number and not a string.
+  We check by using a built in function from javascript called isNaN.
+  if the user does a string or negative value then it will be set to
+  the chosenMaxLife value we have given.*/
+} catch (error) {
+  console.log(error);
+  chosenMaxLife = 100;
+  alert('You entered something wrong, the default value of 100 is used.');
+}
 
 var currentMonsterHealth = chosenMaxLife;
 var currentPlayerHealth = chosenMaxLife;
